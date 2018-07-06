@@ -1,0 +1,12 @@
+.chat-me .am-list-item .am-list-line .am-list-extra{
+    flex-basis:initial;
+}
+.chat-me .am-list-item .am-list-line .am-list-content{
+    padding-right:10px;
+    text-align: right;
+}
+.chat-header{position: fixed;width:100%;top:0;left: 0;z-index:10}
+.inputbox{position:fixed;bottom:0;width:100%;background:#fff;z-index: 10;border-top:solid 1px #D9D9D9;}
+.chatroom{position:absolute;top:50px;bottom:44px;overflow:scroll;width:100%;background:#fff}
+.sendbtn{display: flex;align-items: center}
+.inputbox .am-grid.am-grid-square .am-grid-item .am-grid-item-inner-content .am-grid-icon{margin-top:0}
