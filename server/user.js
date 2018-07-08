@@ -43,7 +43,8 @@ router.post("/readmsg",function (req,res) {
 })
 router.get("/list",function (req,res) {
     const { type } = req.query;
-    User.find({type},function (err,doc) {
+    User.find({type},_filter,function (err,doc) {
+
         res.json({
             code:0,
             data:doc

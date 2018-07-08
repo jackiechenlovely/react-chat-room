@@ -4,6 +4,7 @@ import {getMsgList,sendMsg,getMsg,readMsg} from "../../redux/chart.redux"
 import { connect} from "react-redux"
 import {getChatId,formatContent}  from "../../util";
 import "./chartroom.css"
+
 @connect(
     state=>state,
     {getMsgList,sendMsg,getMsg,readMsg}
@@ -21,13 +22,18 @@ class Chartroom extends React.Component{
             this.props.getMsgList();
             this.props.getMsg();
         };
-        let node = document.getElementById("chatme");
-        if(!node){return}
-        node.scrollTop = node.scrollHeight;
+        setTimeout(function () {
+            let node = document.getElementById("chatme");
+            if(!node){return;}
+            node.scrollTop = node.scrollHeight;
+        },20)
     }
     componentWillUnmount(){
         const id = this.props.match.params.id;
         this.props.readMsg(id);
+    }
+    shouldComponentUpdate(nextProps,nextState){
+        return true
     }
     handleSubmit(){
         const from = this.props.user._id;
@@ -61,8 +67,9 @@ class Chartroom extends React.Component{
               icon:emojiItem
            })
         };
+
         return (
-            <div className={"chatroom"} id={"chatme"}>
+            <div className={"chatroom"} id={"chatme"} ref={"chatme"}>
                 <NavBar className={'chat-header'} mode="dark"
                         onLeftClick={()=>{
                             this.props.history.goBack()
@@ -70,23 +77,23 @@ class Chartroom extends React.Component{
                         icon={<Icon type="left"/>}>
                     {title}
                 </NavBar>
-                {chatmsg.map((item,index)=> {
-                    const avater = require(`../../component/img/${users[item.from].avater}.jpg`);
-                    return item.from === this.props.user._id ?
-                        <List key={index} className="chat-me" >
-                            <Item  wrap extra={<img src={avater} alt={avater}/>}>
-                                <div dangerouslySetInnerHTML={{__html:formatContent(item.content)}}>
-                                </div>
-                            </Item>
-                        </List>
-                        :
-                        <List key={index}>
-                            <Item wrap thumb={avater}>
-                                <div dangerouslySetInnerHTML={{__html:formatContent(item.content)}}>
-                                </div>
-                            </Item>
-                        </List>
-                })}
+                    {chatmsg.map((item,index)=> {
+                        const avater = require(`../../component/img/${users[item.from].avater}.jpg`);
+                        return item.from === this.props.user._id ?
+                            <List key={index} className="chat-me" >
+                                <Item  wrap extra={<img src={avater} alt={avater}/>}>
+                                    <div dangerouslySetInnerHTML={{__html:formatContent(item.content)}}>
+                                    </div>
+                                </Item>
+                            </List>
+                            :
+                            <List key={index}>
+                                <Item wrap thumb={avater}>
+                                    <div dangerouslySetInnerHTML={{__html:formatContent(item.content)}}>
+                                    </div>
+                                </Item>
+                            </List>
+                    })}
                 <div className={"inputbox"}>
                     <InputItem  placeholder={"请输入"} value={this.state.text}
                                 onChange={(v)=>{ this.setState({text:v})}}

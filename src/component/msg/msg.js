@@ -25,27 +25,28 @@ class Msg extends React.Component{
             const blast = this.getLast(b).createtime;
             return blast - alast;
         });
-        console.log(chatList)
         return  <div>
-            {chatList.map( v => {
-               const lastItem = this.getLast(v);
-               const unreadNum = v.filter(item=>!item.read && item.to === userid).length;
-               if(lastItem){
+            {chatList.map( (v) => {
+                   const lastItem = this.getLast(v);
+                   const unreadNum = v.filter(item=>!item.read && item.to === userid).length;
+                   if(lastItem){
                    return (<List key={lastItem.chatid}>
                        <Item
                            extra={<Badge text={unreadNum}></Badge>}
-                           thumb={require(`../img/${users[lastItem.from].avater}.jpg`)}
+                           thumb={require(`../img/${users[lastItem.from===userid ? lastItem.to:lastItem.from].avater}.jpg`)}
                            arrow="horizontal"
                            onClick={()=>{
                                this.props.history.push(`/chartroom/${ userid === lastItem.from ? lastItem.to : lastItem.from}`)
                            }}
                        >
                            <div dangerouslySetInnerHTML={{__html:formatContent(lastItem.content)}}></div>
-                           <Brief>{users[lastItem.from].username}</Brief>
+                           <Brief>msg from {users[lastItem.from].username}</Brief>
                        </Item>
                    </List>)
+                   }
+                   return null;
                }
-            })}
+            )}
         </div>
 
     }

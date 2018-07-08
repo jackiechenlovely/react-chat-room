@@ -2,12 +2,14 @@ import React,{Component} from "react"
 import {NavBar} from "antd-mobile"
 import Navlink from "../navlink/navlink"
 import {connect} from "react-redux"
-import {Switch,Route} from "react-router-dom"
+import {Route} from "react-router-dom"
 import Boss from "../boss/boss"
 import Genius from "../genius/genius"
 import User from "../user/user"
 import Msg from "../msg/msg"
 import {getMsgList,sendMsg,getMsg} from "../../redux/chart.redux"
+import QueueAnim from "rc-queue-anim"
+
 // @overwriteHello  属性代理
 // class Hello extends React.Component{
 //     render(){
@@ -38,7 +40,7 @@ class Dashboard extends Component{
         if(!this.props.chat.chatmsg.length){
             this.props.getMsgList();
             this.props.getMsg();
-        }
+        };
     }
      render(){
          const pathname = this.props.location.pathname;
@@ -49,6 +51,8 @@ class Dashboard extends Component{
                  text:"求职者",
                  icon:"boss",
                  title:"职员列表",
+                 img:"https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg",
+                 imgactive:"https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg",
                  component:Boss,
                  hide:user.type === 'genius'
              },{
@@ -56,6 +60,8 @@ class Dashboard extends Component{
                  text:"boss",
                  icon:"job",
                  title:"总裁列表",
+                 img:"https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg",
+                 imgactive:"https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg",
                  component:Genius,
                  hide:user.type === 'boss'
              },{
@@ -64,24 +70,31 @@ class Dashboard extends Component{
                  icon:"msg",
                  title:"消息列表",
                  component:Msg,
+                 img:"https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg",
+                 imgactive:"https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg",
              },{
                  path:"/user",
                  text:"个人中心",
                  icon:"user",
                  title:"个人中心",
-                 component:User
+                 component:User,
+                 img:"https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg",
+                 imgactive:"https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg",
              }
 
          ];
-         return navList.find(item=>item.path === pathname)?<div>
-             <NavBar mode="dark" className='fixd-header'>{navList.find(item=>item.path === pathname).title}</NavBar>
-             <Switch>
-                 { navList.map(item=>(
-                     <Route key={item.path} path={item.path} component={item.component}></Route>
-                 ))}
-             </Switch>
+         const page = navList.find(v=> v.path === pathname);
+         if(!page){return null}
+         //让动画生效 只渲染一个Route 根据当前组件
+         return <div>
+             <NavBar mode="dark" className='fixd-header'>{page.title}</NavBar>
+             <div>
+                 <QueueAnim type="scaleX" duration={800}>
+                     <Route key={page.path} path={page.path} component={page.component}></Route>
+                 </QueueAnim>
+             </div>
              <Navlink data={navList}></Navlink>
-         </div>:null
+         </div>
      }
 }
 export default Dashboard;

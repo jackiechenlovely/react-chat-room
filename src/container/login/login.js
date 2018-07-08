@@ -31,7 +31,7 @@ class Login extends React.Component{
                 <InputItem onChange={v => this.props.handleChange("username",v)}>
                     用户名
                 </InputItem>
-                <InputItem onChange={v => this.props.handleChange("password",v)}>
+                <InputItem type={"password"} onChange={v => this.props.handleChange("password",v)}>
                     密码
                 </InputItem>
             </List>

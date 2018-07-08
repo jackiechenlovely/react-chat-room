@@ -23,7 +23,7 @@ export function user(state=initState,action){
         case LOADDATA:
             return {...state,...action.payload,redirectTo:getRedirectPath(action.payload)}
         case LOGOUT:
-             return {...initState,redirectTo:"/login"}
+             return {...initState,redirectTo:""}
         default:
             return state;
     }

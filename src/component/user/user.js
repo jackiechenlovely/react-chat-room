@@ -41,7 +41,7 @@ class User extends React.Component{
                 <WhiteSpace/>
                 <Button type={'primary'} onClick={this.logout}>退出登陆</Button>
             </WingBlank>
-        ):<Redirect to={this.props.redirectTo}></Redirect>
+        ):<Redirect to={"/login"}></Redirect>
     }
 }
 

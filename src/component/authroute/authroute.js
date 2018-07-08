@@ -21,10 +21,13 @@ class AuthRoute extends React.Component{
                 if(res.data.code === 0){
                     //有登陆的信息
                     this.props.loadData(res.data.data);
+
                 }else{
                     this.props.history.push("/login")
                 }
             }
+        }).catch(()=>{
+            this.props.history.push("/login");
         })
     }
     render(){

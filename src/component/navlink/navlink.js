@@ -24,7 +24,8 @@ class Navlink extends React.Component{
         return (
             <TabBar>
                 {navList.map(item=>(
-                    <TabBar.Item
+                    <TabBar.Item  icon={<div><img src={item.img} alt={item.img}/></div>}
+                        selectedIcon={<div><img src={item.imgactive} alt={item.imgactive}/></div>}
                         badge={item.path === '/msg'?this.props.chat.unread:0}
                         title={item.text ==='boss'?'霸道总裁':item.text === 'genius'?'求职者': item.text}
                         key={item.text}

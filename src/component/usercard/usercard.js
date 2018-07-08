@@ -20,13 +20,13 @@ class UserCard extends React.Component{
                     <Card onClick={()=>this.handleClick(v)} key={v._id}>
                         <Header title={v.username} thumb={require(`../img/${v.avater}.jpg`)}></Header>
                         <Body>
-                            <div> {v.type === 'boss'? '公司名称 : '+ v.company:null}</div>
-                            <div> 扣扣号码 : {v.qq}</div>
+                            <div> {v.type === 'boss'? '公司名称：' + v.company:null}</div>
+                            <div> 扣扣号码：{v.qq}</div>
                             <div> {v.type === 'boss'? '招聘岗位':'求职岗位'}：{v.title}</div>
                             <div> {v.type === 'boss'? '岗位要求':'个人简介'}：{v.desc.split("\n").map((item,index)=>{
                                 return <span key={item}>{item}{index === v.desc.split("\n").length -1?null:"/"}</span>
                             })}</div>
-                            <div> {v.type === 'boss'? '岗位薪资 : '+v.money:''}</div>
+                            <div> {v.type === 'boss'? '岗位薪资：'+  v.money:''}</div>
                         </Body>
                     </Card>
                 ))}

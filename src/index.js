@@ -1,3 +1,4 @@
+import "babel-polyfill"
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -22,9 +23,13 @@ import AuthRoute from "./component/authroute/authroute"
 import BossInfo from "./container/bossinfo/bossinfo"
 
 import GeniusInfo from "./container/geniusinfo/geniusinfo"
+
 import Dashboard from "./component/dashboard/dashboard"
+
 import Chartroom from "./container/chartroom/chartroom"
+
 import "./index.css"
+
 const store = createStore(
     reducer,
     compose(applyMiddleware(thunk),

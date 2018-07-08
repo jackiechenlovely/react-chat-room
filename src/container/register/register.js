@@ -25,11 +25,11 @@ class Register extends React.Component{
             <List>
                 <InputItem ref={"username"} onChange={v=>this.props.handleChange("username",v)}>登陆名</InputItem>
                 <WhiteSpace/>
-                <InputItem onChange={(v)=>this.props.handleChange("password",v)}>密码</InputItem>
+                <InputItem type={"password"} onChange={(v)=>this.props.handleChange("password",v)}>密码</InputItem>
                 <WhiteSpace/>
-                <InputItem onChange={(v)=>this.props.handleChange("repeatpassword",v)}>确认密码</InputItem>
+                <InputItem type={"password"} onChange={(v)=>this.props.handleChange("repeatpassword",v)}>确认密码</InputItem>
                 <WhiteSpace/>
-                <InputItem onChange={v=>this.props.handleChange("qq",v)}>QQ</InputItem>
+                <InputItem type={"number"} onChange={v=>this.props.handleChange("qq",v)}>QQ</InputItem>
                 <WhiteSpace/>
                 <RadioItem checked={this.props.state.type === 'genius'} onChange={(v)=>this.props.handleChange("type","genius")}>小萝莉</RadioItem>
                 <WhiteSpace/>
