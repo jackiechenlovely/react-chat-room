@@ -63,7 +63,6 @@ export function sendMsg({from,to,msg}){
 export function getMsg(){
     return (dispatch,getState)=>{
         socket.on("getmsg",function(data,senderinfo){
-            console.log(senderinfo)
             const userid = getState().user._id;
             dispatch(msgRecv(data,userid,senderinfo));
             setTimeout(function () {

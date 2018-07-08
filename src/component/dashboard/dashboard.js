@@ -2,7 +2,7 @@ import React,{Component} from "react"
 import {NavBar} from "antd-mobile"
 import Navlink from "../navlink/navlink"
 import {connect} from "react-redux"
-import {Route} from "react-router-dom"
+import {Route,Redirect} from "react-router-dom"
 import Boss from "../boss/boss"
 import Genius from "../genius/genius"
 import User from "../user/user"
@@ -86,7 +86,7 @@ class Dashboard extends Component{
          const page = navList.find(v=> v.path === pathname);
          if(!page){return null}
          //让动画生效 只渲染一个Route 根据当前组件
-         return <div>
+         return this.props.user.username?<div>
              <NavBar mode="dark" className='fixd-header'>{page.title}</NavBar>
              <div>
                  <QueueAnim type="scaleX" duration={800}>
@@ -94,7 +94,7 @@ class Dashboard extends Component{
                  </QueueAnim>
              </div>
              <Navlink data={navList}></Navlink>
-         </div>
+         </div>: <Redirect to={"/login"}></Redirect>
      }
 }
 export default Dashboard;

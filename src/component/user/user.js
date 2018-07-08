@@ -1,7 +1,6 @@
 import React from "react"
 import {Result,List,Button,WingBlank,WhiteSpace,Modal} from "antd-mobile"
 import {connect} from "react-redux"
-import {Redirect} from "react-router-dom"
 import Cookie from "browser-cookies"
 import {logoutSubmit} from "../../redux/user.redux"
 @connect(
@@ -41,7 +40,7 @@ class User extends React.Component{
                 <WhiteSpace/>
                 <Button type={'primary'} onClick={this.logout}>退出登陆</Button>
             </WingBlank>
-        ):<Redirect to={"/login"}></Redirect>
+        ):null
     }
 }
 
