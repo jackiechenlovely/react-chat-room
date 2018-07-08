@@ -19,18 +19,20 @@ const User = model.getModel("user");
 const Chat = model.getModel('chat');
 
 io.on('connection', function (socket) {
-    console.log("a user connect")
-    socket.on('sendmsg', function (data) {
-        console.log(data)
-        const {from,to,msg,avater,username,type} = data;
-        const chatid = [from,to].sort().join("_");
-        Chat.create({chatid,from,to,content:msg},function(err,doc){
-            if(!err){
-                console.log({avater,username,type})
-                io.emit("getmsg",doc,{avater,username,type});
-            }
-        })
-    });
+    let hasconect = true;
+    if(hasconect){
+        socket.on('sendmsg', function (data) {
+            hasconect = false;
+            const {from,to,msg,avater,username,type} = data;
+            const chatid = [from,to].sort().join("_");
+            Chat.create({chatid,from,to,content:msg},function(err,doc){
+                if(!err){
+                    console.log({avater,username,type})
+                    io.emit("getmsg",doc,{avater,username,type});
+                }
+            })
+        });
+    }
 });
 io.on("disconnect",function(socket){
     socket = null;
@@ -52,6 +54,6 @@ const userRouter = require("./user")
 
 app.use("/user",userRouter)
 
-server.listen(8000,"192.168.1.102",function(){
+server.listen(8000,function(){
     console.log("node app start at port 8000")
 })
