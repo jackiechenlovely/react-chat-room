@@ -29,11 +29,13 @@ class Msg extends React.Component{
             {chatList.map( (v) => {
                    const lastItem = this.getLast(v);
                    const unreadNum = v.filter(item=>!item.read && item.to === userid).length;
+                   const user = users[lastItem.from===userid ? lastItem.to:lastItem.from];
+                   if(!user){return null;}
                    if(lastItem){
                    return (<List key={lastItem.chatid}>
                        <Item
                            extra={<Badge text={unreadNum}></Badge>}
-                           thumb={require(`../img/${users[lastItem.from===userid ? lastItem.to:lastItem.from].avater}.jpg`)}
+                           thumb={require(`../img/${user.avater}.jpg`)}
                            arrow="horizontal"
                            onClick={()=>{
                                this.props.history.push(`/chartroom/${ userid === lastItem.from ? lastItem.to : lastItem.from}`)

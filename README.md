@@ -1,4 +1,4 @@
-#  react socket.io及时聊天室
+#  react socket.io聊天室
 
 ## 界面预览
 

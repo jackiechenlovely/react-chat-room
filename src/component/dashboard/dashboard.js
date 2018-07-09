@@ -36,12 +36,6 @@ import QueueAnim from "rc-queue-anim"
 
 
 class Dashboard extends Component{
-    componentDidMount(){
-        if(!this.props.chat.chatmsg.length){
-            this.props.getMsgList();
-            this.props.getMsg();
-        };
-    }
      render(){
          const pathname = this.props.location.pathname;
          const user = this.props.user;

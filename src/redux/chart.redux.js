@@ -1,6 +1,6 @@
 import axios from "axios"
 import io from "socket.io-client"
-const socket =  io.connect("ws://localhost:8000");
+const socket =  io.connect("ws://192.168.42.100:8000");
 //获取聊天列表
 const MSG_LIST = "MSG_LIST"
 //读取信息

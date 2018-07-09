@@ -24,14 +24,10 @@ io.on('connection', function (socket) {
         const chatid = [from,to].sort().join("_");
         Chat.create({chatid,from,to,content:msg},function(err,doc){
             if(!err){
-                /*console.log({avater,username,type})*/
                 io.emit("getmsg",doc,{avater,username,type});
             }
         })
     });
-    socket.on("disconnect",function(socket){
-        socket = null;
-    })
 });
 app.use(cookieParser())
 
@@ -50,6 +46,6 @@ const userRouter = require("./user")
 
 app.use("/user",userRouter)
 
-server.listen(8000,function(){
+server.listen(8000,"192.168.42.100",function(){
     console.log("node app start at port 8000")
 })
